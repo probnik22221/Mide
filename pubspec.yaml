@@ -1,0 +1,46 @@
+name: mide
+description: "A new Flutter project."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.7.2 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  url_launcher: ^6.1.11
+  intl: ^0.20.2
+  shared_preferences: ^2.2.2
+  connectivity_plus: ^6.1.4
+  percent_indicator: ^4.2.2
+  dio: ^5.3.3
+  cached_network_image: ^3.3.0
+  flutter_cache_manager: ^3.3.0
+  flutter_svg: ^2.0.7
+  meta: ^1.16.0
+  json_annotation: ^4.8.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.6
+  json_serializable: ^6.9.5
+  mockito: ^5.4.2
+  mocktail: ^1.0.4
+  lints: ^6.0.0
+  flutter_gen_runner: ^5.3.0
+
+flutter:
+  uses-material-design: true
+
+  # Секция assets должна быть выше generate
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  generate: true
