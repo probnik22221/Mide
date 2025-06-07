@@ -2,7 +2,8 @@
   "@@locale": "en",
   "welcome": "Welcome to Mide",
   "mideDescription": "Your personal psychological assistant",
-
+ "english": "English",
+  "russian": "Russian",
 
   "register": "Register",
   "enterName": "Please enter your name",

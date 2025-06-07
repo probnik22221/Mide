@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../l10n/app_localizations.dart';
 import '../main.dart';
 
 class LanguageSwitcher extends StatelessWidget {
@@ -18,7 +18,7 @@ class LanguageSwitcher extends StatelessWidget {
           value: 'en',
           child: Row(
             children: [
-              const Text('English'),
+              Text(AppLocalizations.of(context)!.english),
               if (currentLocale.languageCode == 'en')
                 const Icon(Icons.check, size: 20),
             ],
@@ -28,27 +28,15 @@ class LanguageSwitcher extends StatelessWidget {
           value: 'ru',
           child: Row(
             children: [
-              const Text('Русский'),
+              Text(AppLocalizations.of(context)!.russian),
               if (currentLocale.languageCode == 'ru')
                 const Icon(Icons.check, size: 20),
             ],
           ),
         ),
       ],
-      onSelected: (languageCode) async {
-        // Сохраняем выбор языка
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setString('language', languageCode);
-
-        // Перезапускаем приложение с новым языком
-        if (context.mounted) {
-          Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => MyApp(locale: Locale(languageCode)),
-            ),
-                (route) => false,
-          );
-        }
+      onSelected: (languageCode) {
+        MyApp.of(context)?.setLocale(Locale(languageCode));
       },
     );
   }

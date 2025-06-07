@@ -28,6 +28,8 @@
     "continueText": "Продолжить",
     "whatIsYourName": "Как вас зовут?",
     "nameRequired": "Пожалуйста, введите ваше имя",
+    "english": "Английский",
+      "russian": "Русский",
 
     "subscription": "Подписка",
     "hello": "Привет",

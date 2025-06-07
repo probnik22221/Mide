@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mide/screens/test_result_screen.dart';
 import 'package:mide/widgets/language_switcher.dart';
-
 import '../ models/test.dart';
+
 import '../l10n/app_localizations.dart';
 
 class TestScreen extends StatefulWidget {
@@ -16,12 +16,40 @@ class TestScreen extends StatefulWidget {
 
 class _TestScreenState extends State<TestScreen> {
   int _currentQuestionIndex = 0;
-  List<int?> _answers = [];
+  late List<int?> _answers;
 
   @override
   void initState() {
     super.initState();
     _answers = List.filled(widget.test.questions.length, null);
+  }
+
+  void _goToPreviousQuestion() {
+    setState(() {
+      _currentQuestionIndex--;
+    });
+  }
+
+  void _goToNextQuestion() {
+    setState(() {
+      _currentQuestionIndex++;
+    });
+  }
+
+  void _completeTest() {
+    final score = _answers.fold<int>(0, (sum, answer) => sum + (answer ?? 0));
+    final maxScore = widget.test.questions.length * 3; // Assuming 4 answer options
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => TestResultScreen(
+          test: widget.test,
+          score: score,
+          maxScore: maxScore,
+        ),
+      ),
+    );
   }
 
   @override
@@ -102,35 +130,6 @@ class _TestScreenState extends State<TestScreen> {
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  void _goToPreviousQuestion() {
-    setState(() {
-      _currentQuestionIndex--;
-    });
-  }
-
-  void _goToNextQuestion() {
-    setState(() {
-      _currentQuestionIndex++;
-    });
-  }
-
-  void _completeTest() {
-    // Логика завершения теста и отображения результатов
-    final score = _answers.fold<int>(0, (sum, answer) => sum + (answer ?? 0));
-    final maxScore = widget.test.questions.length * 3; // Предполагая 4 варианта ответа
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => TestResultScreen(
-          test: widget.test,
-          score: score,
-          maxScore: maxScore,
         ),
       ),
     );

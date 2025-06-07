@@ -8,6 +8,8 @@ class Test {
   final String resultDescriptionEn;
   final String resultDescriptionRu;
 
+
+
   Test({
     required this.id,
     required this.titleEn,
@@ -17,6 +19,8 @@ class Test {
     required this.questions,
     required this.resultDescriptionEn,
     required this.resultDescriptionRu,
+
+
   });
 
   factory Test.fromJson(Map<String, dynamic> json) {

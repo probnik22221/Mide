@@ -580,6 +580,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Refresh quote'**
   String get refreshQuote;
+
+  get pageNotFound => null;
+
+  get back => null;
+
+  get boundariesDescription => null;
+
+  get dontBelieveDescription => null;
+
+  get devalueDescription => null;
+
+  get victimDescription => null;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

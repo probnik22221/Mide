@@ -1,8 +1,16 @@
+//экран окружение
+
+
 import 'package:flutter/material.dart';
+import 'package:mide/screens/victimScreen.dart';
 
 import '../l10n/app_localizations.dart';
 import '../widgets/category_card.dart';
 import '../widgets/language_switcher.dart';
+import 'boundariesScreen.dart';
+import 'devalueScreen.dart';
+import 'dontBelieveScreen.dart';
+
 
 
 class EnvironmentScreen extends StatelessWidget {
@@ -28,33 +36,49 @@ class EnvironmentScreen extends StatelessWidget {
               title: localizations?.dontBelieve ?? "People who don't believe in you",
               icon: Icons.thumb_down,
               color: Colors.red,
-              onTap: () => _navigateToArticle(context, 'dont_believe'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DontBelieveScreen(localizations: localizations),
+                ),
+              ),
             ),
             CategoryCard(
               title: localizations?.boundaries ?? 'People violate boundaries',
               icon: Icons.block,
               color: Colors.orange,
-              onTap: () => _navigateToArticle(context, 'boundaries'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BoundariesScreen(localizations: localizations),
+                ),
+              ),
             ),
             CategoryCard(
               title: localizations?.devalue ?? 'People devalue you',
               icon: Icons.warning,
               color: Colors.purple,
-              onTap: () => _navigateToArticle(context, 'devalue'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => DevalueScreen(localizations: localizations),
+                ),
+              ),
             ),
             CategoryCard(
               title: localizations?.victim ?? 'You are in victim position',
               icon: Icons.help,
               color: Colors.teal,
-              onTap: () => _navigateToArticle(context, 'victim'),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => VictimScreen(localizations: localizations),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  void _navigateToArticle(BuildContext context, String articleId) {
-    // Навигация к статье
   }
 }

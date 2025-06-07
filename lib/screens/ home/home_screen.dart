@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:mide/screens/%20home/relationships_screen.dart';
+import 'package:mide/screens/%20home/work_screen.dart';
+import 'package:mide/screens/tests_screen.dart';
+import '../../ models/option.dart';
+import '../../ models/test.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../widgets/category_card.dart';
 import '../../widgets/daily_quote.dart';
 import '../../widgets/language_switcher.dart';
-
+import '../about_screen.dart';
+import '../awareness_screen.dart';
+import '../environment_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final String? userName;
@@ -30,7 +37,10 @@ class HomeScreen extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
                   '${localizations?.hello}, $userName!',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .headlineSmall,
                 ),
               ),
             const DailyQuote(),
@@ -87,26 +97,76 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _navigateToAwareness(BuildContext context) {
-    // Навигация к разделу осознанности
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AwarenessScreen()),
+    );
   }
 
   void _navigateToEnvironment(BuildContext context) {
-    // Навигация к разделу окружения
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const EnvironmentScreen()),
+    );
   }
 
   void _navigateToRelationships(BuildContext context) {
-    // Навигация к разделу отношений
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const RelationshipsScreen()),
+    );
   }
 
   void _navigateToWork(BuildContext context) {
-    // Навигация к разделу работы
-  }
-
-  void _navigateToTests(BuildContext context) {
-    // Навигация к разделу тестов
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const WorkScreen()),
+    );
   }
 
   void _navigateToAbout(BuildContext context) {
-    // Навигация к разделу "О приложении"
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => const AboutScreen()),
+    );
+  }
+
+  void _navigateToTests(BuildContext context) {
+    final demoTest = Test(
+      id: 'personality_test_1',
+      titleEn: "Personality Test",
+      titleRu: "Тест личности",
+      descriptionEn: "This test will help you understand your personality traits",
+      descriptionRu: "Этот тест поможет вам понять свои личностные черты",
+      resultDescriptionEn: "Based on your answers, we can determine...",
+      resultDescriptionRu: "На основе ваших ответов мы можем определить...",
+      questions: [
+        TestQuestion(
+          questionEn: "How often do you feel stressed?",
+          questionRu: "Как часто вы чувствуете стресс?",
+          options: [
+            TestOption(optionEn: "Never", optionRu: "Никогда", score: 0),
+            TestOption(optionEn: "Sometimes", optionRu: "Иногда", score: 1),
+            TestOption(optionEn: "Often", optionRu: "Часто", score: 2),
+            TestOption(optionEn: "Always", optionRu: "Постоянно", score: 3),
+          ],
+        ),
+        TestQuestion(
+          questionEn: "How do you relax?",
+          questionRu: "Как вы расслабляетесь?",
+          options: [
+            TestOption(optionEn: "Reading", optionRu: "Чтение", score: 0),
+            TestOption(optionEn: "Sports", optionRu: "Спорт", score: 1),
+            TestOption(optionEn: "Music", optionRu: "Музыка", score: 2),
+            TestOption(optionEn: "Other", optionRu: "Другое", score: 3),
+          ],
+        ),
+      ],
+    );
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TestScreen(test: demoTest)),
+    );
   }
 }

@@ -1,10 +1,9 @@
+//экран осознания
 import 'package:flutter/material.dart';
 import 'package:mide/utils/localization.dart';
-
 import '../l10n/app_localizations.dart';
 import '../widgets/category_card.dart';
 import '../widgets/language_switcher.dart';
-
 
 class AwarenessScreen extends StatelessWidget {
   const AwarenessScreen({super.key});
@@ -12,6 +11,10 @@ class AwarenessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final padding = 16.0;
+    final spacing = 16.0;
+    final cardSize = (screenWidth - 2 * padding - spacing) / 2;
 
     return Scaffold(
       appBar: AppBar(
@@ -19,35 +22,57 @@ class AwarenessScreen extends StatelessWidget {
         actions: const [LanguageSwitcher()],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+        padding: EdgeInsets.all(padding),
+        child: Column(
           children: [
-            CategoryCard(
-              title: localizations?.selfAwareness ?? 'Self-awareness',
-              icon: Icons.person,
-              color: Colors.blue,
-              onTap: () => _navigateToArticle(context, 'self_awareness'),
+            // Первая строка карточек
+            Expanded(
+              child: Row(
+                children: [
+                  _buildCategoryCard(
+                    context,
+                    title: localizations?.selfAwareness ?? 'Self-awareness',
+                    icon: Icons.person,
+                    color: Colors.blue,
+                    routeName: '/self_awareness',
+                    size: cardSize,
+                  ),
+                  SizedBox(width: spacing),
+                  _buildCategoryCard(
+                    context,
+                    title: localizations?.worldAwareness ?? 'World awareness',
+                    icon: Icons.public,
+                    color: Colors.green,
+                    routeName: '/world_awareness',
+                    size: cardSize,
+                  ),
+                ],
+              ),
             ),
-            CategoryCard(
-              title: localizations?.worldAwareness ?? 'World awareness',
-              icon: Icons.public,
-              color: Colors.green,
-              onTap: () => _navigateToArticle(context, 'world_awareness'),
-            ),
-            CategoryCard(
-              title: localizations?.peopleAwareness ?? 'People awareness',
-              icon: Icons.people,
-              color: Colors.purple,
-              onTap: () => _navigateToArticle(context, 'people_awareness'),
-            ),
-            CategoryCard(
-              title: localizations?.shareThoughts ?? 'Share thoughts',
-              icon: Icons.edit,
-              color: Colors.orange,
-              onTap: () => _navigateToDiary(context),
+            SizedBox(height: spacing),
+            // Вторая строка карточек
+            Expanded(
+              child: Row(
+                children: [
+                  _buildCategoryCard(
+                    context,
+                    title: localizations?.peopleAwareness ?? 'People awareness',
+                    icon: Icons.people,
+                    color: Colors.purple,
+                    routeName: '/people_awareness',
+                    size: cardSize,
+                  ),
+                  SizedBox(width: spacing),
+                  _buildCategoryCard(
+                    context,
+                    title: localizations?.shareThoughts ?? 'Share thoughts',
+                    icon: Icons.edit,
+                    color: Colors.orange,
+                    routeName: '/diary',
+                    size: cardSize,
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -55,11 +80,21 @@ class AwarenessScreen extends StatelessWidget {
     );
   }
 
-  void _navigateToArticle(BuildContext context, String articleId) {
-    // Навигация к статье
-  }
-
-  void _navigateToDiary(BuildContext context) {
-    // Навигация к дневнику
+  Widget _buildCategoryCard(
+      BuildContext context, {
+        required String title,
+        required IconData icon,
+        required Color color,
+        required String routeName,
+        required double size,
+      }) {
+    return Expanded(
+      child: CategoryCard(
+        title: title,
+        icon: icon,
+        color: color,
+        onTap: () => Navigator.pushNamed(context, routeName),
+      ),
+    );
   }
 }
